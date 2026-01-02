@@ -29,5 +29,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'security.log' => \App\Http\Middleware\SecurityLogger::class,
+        'throttle.login' => \App\Http\Middleware\ThrottleLogin::class,
     ];
 }

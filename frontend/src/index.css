@@ -2,16 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 13px;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode Variables */
+html.dark {
+  --page-bg: #0F1014;
+  --body-bg: #15171C;
+  --card-bg: #15171C;
+  --hover-bg: #1B1C22;
+  --border-color: #26272F;
+  --text-color: #F5F5F5;
+  --text-muted: #9A9CAE;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
 @layer base {
   body {
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply bg-gray-50 text-gray-900;
+  }
+  
+  html.dark body {
+    @apply bg-neutral-950 text-neutral-50;
   }
 }
 
 @layer utilities {
   /* Scrollbar customizada */
   .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
+    height: 5px;
   }
   
   .scrollbar-thin::-webkit-scrollbar-track {
@@ -19,21 +58,21 @@
   }
   
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+    @apply bg-gray-300 dark:bg-neutral-700 rounded;
   }
   
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-gray-500;
+    @apply bg-gray-400 dark:bg-neutral-600;
   }
   
   /* Firefox */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgb(209 213 219) transparent;
+    scrollbar-color: #d1d5db transparent;
   }
   
-  .dark .scrollbar-thin {
-    scrollbar-color: rgb(75 85 99) transparent;
+  html.dark .scrollbar-thin {
+    scrollbar-color: #26272F transparent;
   }
 
   /* Animação de notificação */
@@ -53,19 +92,134 @@
   }
 
   /* Estilização de Select Dropdown */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 3rem;
+  }
+
+  html.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+  }
+
   select option {
-    padding: 8px 12px;
+    padding: 12px 16px;
     background-color: white;
     color: #1f2937;
+    font-size: 14px;
   }
 
-  .dark select option {
-    background-color: #1e293b;
-    color: #f1f5f9;
+  html.dark select option {
+    background-color: #1B1C22;
+    color: #F5F5F5;
   }
 
-  /* Melhorar aparência do dropdown aberto */
+  /* Hover nos options */
+  select option:hover {
+    background-color: #006AE6 !important;
+    color: white !important;
+  }
+
   select:focus {
     outline: none;
   }
+
+  /* Scrollbar nos selects */
+  select::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  select::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  html.dark select::-webkit-scrollbar-track {
+    background: #26272F;
+  }
+
+  select::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  select::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+/* Custom Component Styles */
+@layer components {
+  .card {
+    @apply bg-white dark:bg-neutral-900 rounded-xl border border-gray-200 dark:border-neutral-700 shadow-sm;
+  }
+
+  .card-hover {
+    @apply transition-shadow hover:shadow-md;
+  }
+
+  .btn-primary {
+    @apply bg-[#006AE6] hover:bg-[#1570d9] text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+
+  .btn-success {
+    @apply bg-[#00A261] hover:bg-[#01BF73] text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+
+  .btn-danger {
+    @apply bg-[#E42855] hover:bg-[#FF3767] text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+
+  .input-base {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#006AE6] outline-none transition-colors;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-blue-100 dark:bg-neutral-800 text-blue-800 dark:text-[#006AE6];
+  }
+
+  .badge-success {
+    @apply bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-400;
+  }
+}
+
+/* Sidebar Scrollbar - fora do @layer para ter prioridade */
+.sidebar-scroll {
+  scrollbar-width: thin !important;
+  scrollbar-color: #6b6d71 transparent !important;
+}
+
+.sidebar-scroll:hover {
+  scrollbar-color: #808290 transparent !important;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #6b6d71 !important;
+  border-radius: 3px !important;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #808290 !important;
 }

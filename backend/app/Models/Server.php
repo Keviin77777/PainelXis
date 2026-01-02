@@ -18,6 +18,8 @@ class Server extends Model
         'primary_dns',
         'random_dns',
         'reseller_group_id',
+        'reseller_username',
+        'reseller_password',
         'order',
         'timezone',
         'default_password',
@@ -36,6 +38,7 @@ class Server extends Model
     ];
 
     protected $hidden = [
-        'api_key'
+        'api_key',
+        'reseller_password'
     ];
 }

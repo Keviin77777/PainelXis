@@ -1,30 +1,34 @@
-import { useNotificationStore } from '../store/notificationStore'
+import { useNotificationStore } from '../stores/notificationStore'
 
 // Helper functions para usar notificações facilmente
 export const notify = {
   success: (message, title) => {
-    useNotificationStore.getState().addNotification({
+    const notificationStore = useNotificationStore()
+    notificationStore.addNotification({
       type: 'success',
       message,
       title
     })
   },
   error: (message, title) => {
-    useNotificationStore.getState().addNotification({
+    const notificationStore = useNotificationStore()
+    notificationStore.addNotification({
       type: 'error',
       message,
       title
     })
   },
   warning: (message, title) => {
-    useNotificationStore.getState().addNotification({
+    const notificationStore = useNotificationStore()
+    notificationStore.addNotification({
       type: 'warning',
       message,
       title
     })
   },
   info: (message, title) => {
-    useNotificationStore.getState().addNotification({
+    const notificationStore = useNotificationStore()
+    notificationStore.addNotification({
       type: 'info',
       message,
       title
